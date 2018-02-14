@@ -13,13 +13,14 @@ reddit = praw.Reddit(client_id=redd_client_id,
                      password=redd_password,
                      user_agent=redd_user_agent,
                      username=redd_username)
-print(redd_client_id)
-print(redd_client_secret)
-print(redd_password)
-print(redd_user_agent)
-print(redd_username)
+# print(redd_client_id)
+# print(redd_client_secret)
+# print(redd_password)
+# print(redd_user_agent)
+# print(redd_username)
 
 print(reddit.user.me())
+# print(reddit.redditor(redd_username))
 print('done')
 
 # public_tweets = api.home_timeline()
