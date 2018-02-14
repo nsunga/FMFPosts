@@ -48,7 +48,7 @@ def main():
 
     for every_key, every_value in tweet_list.items():
         print(every_key, every_value)
-        twit_api.update_status(every_key + every_value)
+        twit_api.update_status(every_key + ' ' + every_value)
         break
     # twit_api.update_status(tweet_list[0] +)
     # for every_title in tweet_list:
