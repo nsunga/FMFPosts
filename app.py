@@ -23,13 +23,19 @@ def connect_to_reddit():
                          user_agent=redd_user_agent,
                          username=redd_username)
 
-def get_titles(reddit, subreddit):
-    title_list = []
+# TODO: Instead use a dictionary -> INDEX : (TITLE, URL)
+def title_url_dictionary(reddit, subreddit):
+    title_and_url = {}
     for every_submission in reddit.subreddit('frugalmalefashion').new(limit=5):
-        title_list.append(every_submission.title)
-        print("PRINTING URLS", every_submission.url)
+        title_and_url[every_submission.title] = every_submission.url
 
-    return title_list
+    return title_and_url
+
+def connect_to_twitter():
+    twit_auth = tweepy.OAuthHandler(twit_consumer_key, twit_consumer_secret)
+    twit_auth.set_access_token(twit_access_token, twit_token_secret)
+    twit_api = tweepy.API(twit_auth)
+    return twit_api
 
 def main():
     reddit = connect_to_reddit()
@@ -37,10 +43,16 @@ def main():
     print(reddit.user.me())
     print('reddit credentials good')
 
-    tweet_list = get_titles(reddit, reddit.subreddit('frugalmalefashion'))
+    tweet_list = title_url_dictionary(reddit, reddit.subreddit('frugalmalefashion'))
+    twit_api = connect_to_twitter()
 
-    for every_title in tweet_list:
-        print(every_title + '\n')
+    for every_key, every_value in tweet_list.items():
+        print(every_key, every_value)
+        twit_api.update_status(every_key + every_value)
+        break
+    # twit_api.update_status(tweet_list[0] +)
+    # for every_title in tweet_list:
+    #     print(every_title + '\n')
 
 
 # public_tweets = api.home_timeline()
