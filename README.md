@@ -1,2 +1,2 @@
 # FMFPosts
-twitter bot
+twitter bot that uses Reddit and Twitter API
